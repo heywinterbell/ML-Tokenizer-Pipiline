@@ -1,0 +1,10 @@
+The cat sat on the mat.
+The cat slept all day.
+The dog sat on the mat.
+The dog barked at the cat.
+The cat chased the dog.
+The dog ran to the mat.
+The cat sat on the mat again.
+A cat and a dog played in the sun.
+The sun was warm and the mat was soft.
+The dog slept and the cat watched the sun.

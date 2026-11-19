@@ -80,19 +80,19 @@ python -m unittest discover -s tests -v
 ## Example output
 
 ```text
-Vocabulary size: 42 tokens (including 4 special tokens)
+Vocabulary size: 28 tokens (including 4 special tokens)
 
 Sentence:  "the cat sat on the mat"
 Tokens:    ['<BOS>', 'the', 'cat', 'sat', 'on', 'the', 'mat', '<EOS>']
-Token ids: [2, 4, 5, 6, 7, 4, 8, 3]
+Token ids: [2, 4, 5, 10, 9, 4, 7, 3]
 Decoded:   "the cat sat on the mat"
 
 Top 5 most frequent tokens:
-  the    12
-  cat     6
-  sat     4
-  on      4
-  mat     3
+  the    19
+  cat     7
+  dog     6
+  mat     5
+  and     3
 
 Graph saved to outputs/token_frequency.png
 ```
