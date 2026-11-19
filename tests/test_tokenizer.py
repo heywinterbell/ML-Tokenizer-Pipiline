@@ -15,6 +15,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.tokenizer import Tokenizer
+from src.gui import describe_result
 from src.vocabulary import Vocabulary
 from src.visualize import plot_top_tokens
 
@@ -99,6 +100,35 @@ class TestVisualize(unittest.TestCase):
             self.assertEqual(saved, path)
             self.assertTrue(os.path.exists(path))
             self.assertGreater(os.path.getsize(path), 1000)
+
+
+class TestGuiHelper(unittest.TestCase):
+    def test_describe_known_sentence(self):
+        """A sentence of known words: ids match encode(), nothing
+        is unknown, and decoding gives the sentence back."""
+        tokenizer = Tokenizer.train(CORPUS)
+        result = describe_result(tokenizer, "the cat sat")
+        self.assertEqual(result["tokens"], ["<BOS>", "the", "cat", "sat", "<EOS>"])
+        self.assertEqual(result["ids"], tokenizer.encode("the cat sat"))
+        self.assertEqual(result["decoded"], "the cat sat")
+        self.assertEqual(result["unknown"], [])
+
+    def test_describe_lists_unknown_words(self):
+        """Unknown words are listed (sorted) so the GUI can show
+        them in red."""
+        tokenizer = Tokenizer.train(CORPUS)
+        result = describe_result(tokenizer, "the zebra danced under the moon")
+        self.assertEqual(
+            result["unknown"], ["danced", "moon", "under", "zebra"]
+        )
+        self.assertEqual(result["decoded"], "the <UNK> <UNK> <UNK> the <UNK>")
+
+    def test_describe_empty_text(self):
+        """An empty box still gives valid ids: just <BOS> and <EOS>."""
+        tokenizer = Tokenizer.train(CORPUS)
+        result = describe_result(tokenizer, "")
+        self.assertEqual(result["ids"], [2, 3])
+        self.assertEqual(result["unknown"], [])
 
 
 if __name__ == "__main__":
