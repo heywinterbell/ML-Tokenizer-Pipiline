@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.tokenizer import Tokenizer
 from src.gui import describe_result
 from src.vocabulary import Vocabulary
-from src.visualize import plot_top_tokens
+from src.visualize import build_figure, plot_top_tokens
 
 CORPUS = [
     "The cat sat on the mat",
@@ -91,6 +91,14 @@ class TestTokenizer(unittest.TestCase):
 
 
 class TestVisualize(unittest.TestCase):
+    def test_build_figure_is_3d(self):
+        """The chart is a 3D bar chart, not a flat one: its axes
+        are a 3D axes."""
+        vocab = Vocabulary.build(CORPUS)
+        fig = build_figure(vocab, n=5)
+        self.assertEqual(len(fig.axes), 1)
+        self.assertEqual(fig.axes[0].name, "3d")
+
     def test_plot_saves_a_non_empty_png(self):
         """plot_top_tokens writes a real PNG file to the given path."""
         vocab = Vocabulary.build(CORPUS)

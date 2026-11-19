@@ -57,7 +57,7 @@ def main():
 
     print_top_tokens(tokenizer.vocab, n=10)
     print()
-    graph = plot_top_tokens(tokenizer.vocab, n=15, output_path=GRAPH_PATH)
+    graph = plot_top_tokens(tokenizer.vocab, n=10, output_path=GRAPH_PATH)
     print(f"Graph saved to {graph}")
 
 

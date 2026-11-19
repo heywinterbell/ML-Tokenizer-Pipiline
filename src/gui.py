@@ -5,10 +5,10 @@ Run it with:  python3 -m src.gui
 A window opens with a text box. Type any sentence and the tokens,
 token ids and decoded text update as you type — no need to press
 anything. Words the vocabulary has never seen are listed in red as
-unknown. The bar chart at the bottom shows the most frequent tokens.
+unknown. The 3D bar chart at the bottom shows the most frequent tokens.
 
 Built with tkinter, which ships with Python, so there is nothing
-extra to install. The chart is drawn with matplotlib's TkAgg
+extra to install. The 3D bar chart is drawn with matplotlib's TkAgg
 backend, which draws the figure inside the window instead of
 saving it to a file.
 """
@@ -17,10 +17,10 @@ import tkinter as tk
 from tkinter import ttk
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
 from .pipeline import CORPUS_PATH, load_corpus
 from .tokenizer import Tokenizer
+from .visualize import build_figure
 from .vocabulary import UNK_TOKEN, split_words
 
 
@@ -43,26 +43,6 @@ def describe_result(tokenizer, text):
         {word for word in split_words(text) if tokenizer.vocab.id_for(word) == unk_id}
     )
     return {"tokens": tokens, "ids": ids, "decoded": decoded, "unknown": unknown}
-
-
-def build_figure(vocab, n=10):
-    """A matplotlib Figure with the ``n`` most frequent tokens.
-
-    Same chart as ``visualize.plot_top_tokens``, but returned as a
-    figure so the GUI can embed it instead of saving a PNG file.
-    """
-    top = vocab.most_common(n)
-    words = [word for word, _ in top]
-    counts = [count for _, count in top]
-
-    fig = Figure(figsize=(7, 4))
-    ax = fig.add_subplot(111)
-    ax.barh(words[::-1], counts[::-1])  # reverse: biggest bar on top
-    ax.set_xlabel("Count")
-    ax.set_ylabel("Token")
-    ax.set_title(f"Top {len(top)} most frequent tokens")
-    fig.tight_layout()
-    return fig
 
 
 class TokenizerApp:
@@ -101,9 +81,9 @@ class TokenizerApp:
         self.unknown_label = ttk.Label(frame, text="", foreground="red")
         self.unknown_label.pack(anchor=tk.W, pady=(2, 12))
 
-        ttk.Label(frame, text="Most frequent tokens:").pack(anchor=tk.W)
+        ttk.Label(frame, text="Most frequent tokens (3D):").pack(anchor=tk.W)
         canvas = FigureCanvasTkAgg(
-            build_figure(tokenizer.vocab), master=frame
+            build_figure(tokenizer.vocab, n=10), master=frame
         )
         canvas.draw()
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
