@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Generated outputs (the graph is rebuilt every run)
+outputs/
+
+# Virtual environments
+.venv/
+venv/
+.env

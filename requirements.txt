@@ -1,0 +1,3 @@
+# Only dependency: matplotlib, for the token frequency graph.
+# Everything else in this project is pure Python (standard library only).
+matplotlib>=3.6
