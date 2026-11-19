@@ -480,9 +480,11 @@ $("btn-rebuild").addEventListener("click", () => {
     return;
   }
   const before = Object.keys(vocab.wordToId).length;
-  rebuild([...corpus, ...lines],
-    "Vocabulary rebuilt: " + Object.keys(vocab.wordToId).length +
-    " tokens (was " + before + ") from " + corpus.length + " sentences.");
+  const newCorpus = [...corpus, ...lines];
+  const newVocab = buildVocab(newCorpus);
+  rebuild(newCorpus,
+    "Vocabulary rebuilt: " + Object.keys(newVocab.wordToId).length +
+    " tokens (was " + before + ") from " + newCorpus.length + " sentences.");
 });
 
 $("btn-reset").addEventListener("click", () => {
@@ -491,7 +493,7 @@ $("btn-reset").addEventListener("click", () => {
 });
 
 /* =====================================================================
-   Load the vocabulary built by the Python pipeline (web/vocab.json).
+   Load the vocabulary built by the Python pipeline (docs/vocab.json).
    If it cannot load — e.g. the page was double-clicked instead of
    served — explain how to open it properly.
    ===================================================================== */
@@ -516,7 +518,7 @@ fetch("vocab.json")
     el.style.display = "block";
     el.textContent = "Could not load vocab.json (" + err.message + "). " +
       "Open this site with a local server instead of double-clicking it: " +
-      "in the web/ folder run  python3 -m http.server 8000  and visit http://localhost:8000";
+      "in the docs/ folder run  python3 -m http.server 8000  and visit http://localhost:8000";
   });
 </script>
 </body>

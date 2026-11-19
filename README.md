@@ -79,7 +79,8 @@ pip install -r requirements.txt
 python3 -m src.pipeline
 
 # 3. Or open the website (see below)
-#    Live: https://heywinterbell.github.io/ML-Tokenizer-Pipiline/
+#    Live: https://ml-tokenizer-pipeline.vercel.app/
+#    Also live: https://heywinterbell.github.io/ML-Tokenizer-Pipiline/
 #    Locally: cd docs && python3 -m http.server 8000
 
 # 4. Run the tests
@@ -91,8 +92,9 @@ exist there. (On Windows, `python` is the usual spelling.)
 
 ## Try the website
 
-The live demo is at **https://heywinterbell.github.io/ML-Tokenizer-Pipiline/** —
-no install, just open it in a browser.
+The live demo is at **https://ml-tokenizer-pipeline.vercel.app/** —
+no install, just open it in a browser. It is also live on GitHub Pages
+at https://heywinterbell.github.io/ML-Tokenizer-Pipiline/.
 
 Type any sentence and the tokens, token ids and decoded text update as
 you type. Words the vocabulary has never seen are listed in red as
@@ -112,12 +114,13 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-The site is deployed with GitHub Pages: repo Settings → Pages →
-“Deploy from a branch”, branch `main`, folder `/docs`. Every push to
-`main` redeploys it automatically. The vocabulary it loads
-(`docs/vocab.json`) is generated from the sample corpus by
-`python3 scripts/build_vocab.py`, so the site and the Python pipeline
-can never drift apart.
+The site is deployed on Vercel: the project `ml-tokenizer-pipeline`
+imports this repo with the root directory set to `docs`, so every push
+to `main` redeploys it automatically. It is also deployed with GitHub
+Pages (repo Settings → Pages → “Deploy from a branch”, branch `main`,
+folder `/docs`). The vocabulary it loads (`docs/vocab.json`) is
+generated from the sample corpus by `python3 scripts/build_vocab.py`,
+so the site and the Python pipeline can never drift apart.
 
 ## Example output
 
