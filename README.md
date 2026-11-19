@@ -58,6 +58,7 @@ ML-Tokenizer-Pipiline/
 │   ├── vocabulary.py          Step 1 — count words, build the vocabulary
 │   ├── tokenizer.py           Step 2 — encode text to ids, decode ids to text
 │   ├── visualize.py           Step 3 — draw the token frequency graph
+│   ├── gui.py                 Live window — type a sentence, see tokens instantly
 │   └── pipeline.py            Runs all three steps end to end
 ├── tests/
 │   └── test_tokenizer.py      Checks that each step behaves correctly
@@ -70,12 +71,27 @@ ML-Tokenizer-Pipiline/
 # 1. Install the only dependency (for the graph)
 pip install -r requirements.txt
 
-# 2. Run the whole pipeline
-python -m src.pipeline
+# 2. Run the whole pipeline in the terminal
+python3 -m src.pipeline
 
-# 3. Run the tests
-python -m unittest discover -s tests -v
+# 3. Or open the live GUI window instead
+python3 -m src.gui
+
+# 4. Run the tests
+python3 -m unittest discover -s tests -v
 ```
+
+On macOS and Linux the command is `python3` — plain `python` does not
+exist there. (On Windows, `python` is the usual spelling.)
+
+## Try the GUI
+
+`python3 -m src.gui` opens a window with a text box. Type any sentence
+and the tokens, token ids and decoded text update as you type. Words
+the vocabulary has never seen are listed in red as unknown, and the
+bar chart of the most frequent tokens is drawn at the bottom of the
+window. It uses tkinter, which ships with Python, so there is nothing
+extra to install.
 
 ## Example output
 
