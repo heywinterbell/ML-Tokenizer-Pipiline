@@ -21,7 +21,7 @@ It does this in two steps:
    the vocabulary. Words the vocabulary has never seen become `<UNK>`
    (unknown).
 
-This project does both steps, then draws a **graph of the most frequent
+This project does both steps, then draws a **3D graph of the most frequent
 tokens** so you can *see* the vocabulary instead of just trusting it.
 
 ## What this pipeline does
@@ -41,7 +41,7 @@ data/sample_corpus.txt
 └────────┬─────────┘
          ▼
 ┌──────────────────┐
-│ 3. Visualize     │  Bar chart of the most frequent tokens,
+│ 3. Visualize     │  3D bar chart of the most frequent tokens,
 │   (visualize)    │  saved to outputs/token_frequency.png
 └──────────────────┘
 ```
@@ -57,7 +57,7 @@ ML-Tokenizer-Pipiline/
 ├── src/
 │   ├── vocabulary.py          Step 1 — count words, build the vocabulary
 │   ├── tokenizer.py           Step 2 — encode text to ids, decode ids to text
-│   ├── visualize.py           Step 3 — draw the token frequency graph
+│   ├── visualize.py           Step 3 — draw the 3D token frequency graph
 │   ├── gui.py                 Live window — type a sentence, see tokens instantly
 │   └── pipeline.py            Runs all three steps end to end
 ├── tests/
@@ -89,7 +89,7 @@ exist there. (On Windows, `python` is the usual spelling.)
 `python3 -m src.gui` opens a window with a text box. Type any sentence
 and the tokens, token ids and decoded text update as you type. Words
 the vocabulary has never seen are listed in red as unknown, and the
-bar chart of the most frequent tokens is drawn at the bottom of the
+3D bar chart of the most frequent tokens is drawn at the bottom of the
 window. It uses tkinter, which ships with Python, so there is nothing
 extra to install.
 
